@@ -1,0 +1,61 @@
+table {
+    border-collapse: separate;
+    border-spacing: 0; 
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    padding: 5px;
+    background: linear-gradient(180deg, #009FFD 0%, #263148 100%);
+}
+
+td {
+    padding: 1em;
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+}
+
+.container {
+    padding-top: 2em;
+}
+
+.column-2  {
+    background-color: #FF3A59;
+    
+    &.column-playing {
+        background-color: red;
+        opacity: 1;
+    }
+}
+
+.column-1  {
+    background-color: #263148;
+    opacity: 0.9;
+
+    &.column-playing {
+        background-color: black;
+        opacity: 1;
+    }
+}
+
+.column-0  {
+    background-color: white;
+    color: black;
+
+    &.column-playing {
+        background-color: #0098f0;
+        color: white;
+        opacity: 1;
+    }
+}
+
+.column-played {
+    opacity: 0.3;
+}
+
+
+.squares {
+    background: linear-gradient(180deg, #009FFD 0%, #2A2A72 100%);
+}
+
+.form-control[readonly] {
+    color: white;
+}
