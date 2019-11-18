@@ -20,3 +20,16 @@ steps:
     npm install
     ng build --prod
   displayName: 'npm install and build'
+  
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'roulettebetting - Azure'
+    appType: 'webAppLinux'
+    WebAppName: 'roulettebetting'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'RouletteBetting'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'NODE|12-lts'
+    StartupCommand: 'ng serve'
