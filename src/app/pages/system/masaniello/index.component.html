@@ -1,106 +1,24 @@
-<div class="wrapper">
-  <div class="page-header header-filter">
-    <div class="squares square1"></div>
-    <div class="squares square2"></div>
-    <div class="squares square3"></div>
-    <div class="squares square4"></div>
-    <div class="squares square5"></div>
-    <div class="squares square6"></div>
-    <div class="squares square7"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-2">
-          <div class="form-group">
-            <p class="category">Unit value</p>
-            <input class="form-control" type="number" value="1" (change)="masaniello.reset($event.target.valueAsNumber)">
-            <p class="category">Set Result</p>
-            <button class="btn btn-danger mr-1" (click)="masaniello.play(2)">Red</button>
-            <button class="btn btn-success mr-1" (click)="masaniello.play(0)">0</button>
-            <button class="btn mr-1" (click)="masaniello.play(1)">Black</button>
-            <p class="category">Current bet</p>
-            <input class="form-control" [ngClass]="(!masaniello.currentBetColor ? 'btn-success' : (masaniello.currentBetColor == 1 ? '' : 'btn-danger'))" type="text" [value]="masaniello.currentBet" [readonly]="true">
-            <p class="category">Balance</p>
-            <input class="form-control" type="number" [value]="masaniello.balance" [readonly]="true">
-            <button class="btn btn-neutral mr-1" (click)="masaniello.reset()">Reset</button>
-          </div>
-        </div>
-        <div class="col-sm-10">
-            <table style="width:100%">
-              <tr *ngFor="let row of masaniello.gameSystem">
-                <td *ngFor="let column of row.columns" [ngClass]="['column-' + column.color, (column.status == 1 ? 'column-playing' : column.status == 2 ? 'column-played' : '')]">{{ column.value }}</td>
-              </tr>
-            </table>
-          </div>
-      </div>
+<div class="row" style=" margin: 0; margin-top: 10em;">
+  <div class="col-sm-1">
+    <div class="form-group">
+      <p class="category">Unit value</p>
+      <input class="form-control" type="number" value="1" (change)="masaniello.reset($event.target.valueAsNumber)">
+      <p class="category">Set Result</p>
+      <button class="btn btn-danger mr-1" (click)="masaniello.play(2)">Red</button>
+      <button class="btn btn-success mr-1" (click)="masaniello.play(0)">0</button>
+      <button class="btn mr-1" (click)="masaniello.play(1)">Black</button>
+      <p class="category">Current bet</p>
+      <input class="form-control" [ngClass]="(!masaniello.currentBetColor ? 'btn-success' : (masaniello.currentBetColor == 1 ? '' : 'btn-danger'))" type="text" [value]="masaniello.currentBet" [readonly]="true">
+      <p class="category">Balance</p>
+      <input class="form-control" type="number" [value]="masaniello.balance" [readonly]="true">
+      <button class="btn btn-neutral mr-1" (click)="masaniello.reset()">Reset</button>
     </div>
   </div>
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3"><h1 class="title">ROULETTE• Betting</h1></div>
-        <div class="col-md-3">
-          <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/home']"> Home </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/indexDemo']"> Demo </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/landing']"> Landing </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/register']"> Register </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/profile']"> Profile </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-3">
-          <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link" href="mailto:hfa.almeida@gmail.com">
-                Contact Me
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-3" style="margin-top: 3em">
-          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick" />
-            <input type="hidden" name="hosted_button_id" value="MX7YA5UPF2BMA" />
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-            <img alt="" border="0" src="https://www.paypal.com/en_PT/i/scr/pixel.gif" width="1" height="1" />
-          </form>
-        </div>
-        <!-- <div class="col-md-3">
-          <h3 class="title">Follow us:</h3>
-          <div class="btn-wrapper profile">
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
-              href="https://twitter.com/creativetim"
-              target="_blank"
-            >
-              <i class="fab fa-twitter"> </i>
-            </a>
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
-              href="https://www.facebook.com/creativetim"
-              target="_blank"
-            >
-              <i class="fab fa-facebook-square"> </i>
-            </a>
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple"
-              href="https://dribbble.com/creativetim"
-              target="_blank"
-            >
-              <i class="fab fa-dribbble"> </i>
-            </a>
-          </div>
-        </div> -->
-      </div>
+  <div class="col-sm-11">
+      <table style="width:100%">
+        <tr *ngFor="let row of masaniello.gameSystem">
+          <td *ngFor="let column of row.columns" [ngClass]="['column-' + column.color, (column.status == 1 ? 'column-playing' : column.status == 2 ? 'column-played' : '')]">{{ column.value }}</td>
+        </tr>
+      </table>
     </div>
-  </footer>
 </div>

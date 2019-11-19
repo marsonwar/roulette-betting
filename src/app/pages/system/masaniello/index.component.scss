@@ -9,8 +9,7 @@ table {
 
 td {
     padding: 1em;
-    padding-left: 2.5em;
-    padding-right: 2.5em;
+    text-align: center;
 }
 
 .container {
@@ -49,11 +48,6 @@ td {
 
 .column-played {
     opacity: 0.3;
-}
-
-
-.squares {
-    background: linear-gradient(180deg, #009FFD 0%, #2A2A72 100%);
 }
 
 .form-control[readonly] {

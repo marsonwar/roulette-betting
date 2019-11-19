@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/747fef84-bcdb-4fd1-a721-b17a837fea3a/resourceGroups/RouletteBetting/providers/Microsoft.Web/sites/roulettebetting",
+    "appService.deploySubpath": ""
+}
