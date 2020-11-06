@@ -51,19 +51,20 @@
         </div>
       </div>
       <ul class="navbar-nav">
-        <li class="dropdown nav-item" dropdown>
+        <li class="dropdown nav-item" ngbDropdown>
           <a
+            role="button"
             class="dropdown-toggle nav-link dropdown-toggle"
-            data-toggle="dropdown"
-            dropdownToggle
+            ngbDropdownToggle
             href="javascript:void(0)"
           >
             <i class="fa fa-cogs d-lg-none d-xl-none"> </i> Betting systems
           </a>
-          <div class="dropdown-menu dropdown-with-icons" *dropdownMenu>
+          <div class="dropdown-menu dropdown-with-icons" ngbDropdownMenu>
             <a
               class="dropdown-item"
               [routerLink]="['/masaniello']"
+              ngbDropdownItem
             >
               • Masaniello
             </a>

@@ -5,8 +5,7 @@ import { RouterModule } from "@angular/router";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
-
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PagesModule } from "./pages/pages.module";
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
@@ -17,11 +16,12 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
   imports: [
     BrowserAnimationsModule,
     CollapseModule,
+    NgbModule,
     FormsModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    PagesModule
+    PagesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
