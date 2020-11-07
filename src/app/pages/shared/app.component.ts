@@ -1,31 +1,40 @@
 import { Component } from '@angular/core';
-
 import { NbMenuItem } from '@nebular/theme';
+import { Observable } from 'rxjs';
+import {  select, Store } from '@ngrx/store';
+
+import { InstanceModel } from 'src/app/data/models/instance-model';
+import { GameModel } from 'src/app/data/models/game-model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
+
 export class AppComponent {
-  items: NbMenuItem[] = [
+
+  //#region Properties
+
+  balance$: Observable<number>;
+  menuItems: NbMenuItem[] = [
     {
       title: 'Home',
-      icon: 'person-outline'
+      link: '/'
     },
     {
-      title: 'Systems',
-      children: [
-        {
-          title: 'Masaniello',
-        }
-      ],
-    },
-    {
-      title: 'Shopping Bag',
-    },
-    {
-      title: 'Orders',
-    },
+      title: 'Play',
+      link: '/play'
+    }
   ];
+
+  //#endregion Properties
+
+  //#region Constructor
+
+  constructor(store: Store<InstanceModel>) {
+    this.balance$ = store.pipe(select(a => a.TotalBalance));
+  }
+
+  //#endregion
 }
