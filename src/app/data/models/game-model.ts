@@ -1,7 +1,7 @@
 export class GameModel {
     //#region Properties
 
-    public Balance:number;
+    public Balance:number = 0;
 
     //#endregion
 }

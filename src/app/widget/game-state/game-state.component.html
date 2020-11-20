@@ -1,1 +1,9 @@
-<p>game-state works!</p>
+<nb-card>
+    <nb-card-body> 
+        <table style="width:100%">
+            <tr *ngFor="let row of games$ | async">
+                <td *ngFor="let column of row.columns" [ngClass]="['column-' + column.color, (column.status == 1 ? 'column-playing' : column.status == 2 ? 'column-played' : '')]">{{ column.value }}</td>
+            </tr>
+        </table>
+    </nb-card-body>
+</nb-card>

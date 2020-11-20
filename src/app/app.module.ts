@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NbButtonModule, NbInputModule, NbLayoutModule, NbMenuModule, NbSidebarModule, NbThemeModule } from '@nebular/theme';
+import { NbLayoutModule, NbMenuModule, NbSidebarModule, NbThemeModule } from '@nebular/theme';
 
 import { AppComponent } from './pages/shared/app.component';
 import { SystemModule } from './pages/system/system.module';
@@ -12,7 +12,6 @@ import { PlayComponent } from './pages/play/play.component';
 import { StoreModule } from '@ngrx/store';
 import { instanceReducer } from './data/reducers/Instace-reducer';
 import { WidgetModule } from './widget/widget.module';
-import { GameStateComponent } from './game-state/game-state.component';
 
 const routes: Routes = [{
     path: '',
@@ -27,7 +26,6 @@ const routes: Routes = [{
   declarations: [
     AppComponent,
     PlayComponent,
-    GameStateComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +39,7 @@ const routes: Routes = [{
     StoreModule.forRoot({
       instance: instanceReducer
     }, {}),
-    WidgetModule
+    WidgetModule,
   ],
   exports: [
     NbLayoutModule
