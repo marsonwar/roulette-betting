@@ -1,0 +1,43 @@
+table {
+    border: 1 solid black;
+}
+
+thead td:first-child {
+    width: 150px;
+}
+thead td:nth-child(2),
+thead td:nth-child(3) {
+    width: 100px;
+}
+
+tr td:nth-child(2),
+tr td:nth-child(3) {
+    text-align: right;
+    padding-right: 10px;
+}
+
+tr td {
+    width: 100px;
+    
+    padding-right: 15px;
+    padding-left: 15px;
+    text-align: left;
+    color: black;
+}
+
+tr td.right {
+    text-align: right;
+    color: red;
+}
+
+tr td.center {
+    text-align: center;
+    color: green;
+}
+
+tr td.green {
+    color: green;
+}
+tr td.red {
+    color: red;
+}

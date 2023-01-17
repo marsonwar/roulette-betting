@@ -1,0 +1,7 @@
+<app-stats [stats$]="game.stats$"></app-stats>
+<button (click)="onPlayClick()">Play</button>
+<div class="content">
+
+    <app-table [bets$]="game.bets$" [stats$]="game.stats$"></app-table>
+    <app-history [history$]="game.history$"></app-history>
+</div>

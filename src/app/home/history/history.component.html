@@ -1,0 +1,26 @@
+<table>
+    <thead>
+        <td>
+            Number
+        </td>
+        <td>
+            Diff
+        </td>
+        <td>
+            Ballance
+        </td>
+    </thead>
+    <tbody *ngFor="let hist of history">
+        <tr>
+            <td [ngClass]="{ 'center': hist.Color == 1, 'right': hist.Color == 0 }" >
+                {{ hist.Number }}
+            </td>
+            <td  [ngClass]="{ 'green': hist.DiffBallance > 0, 'red': hist.DiffBallance < 0 }">
+                {{ hist.DiffBallance }} €
+            </td>
+            <td>
+                {{ hist.Ballance }} €
+            </td>
+        </tr>
+    </tbody>
+</table>

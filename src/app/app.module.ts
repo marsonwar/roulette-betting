@@ -1,29 +1,30 @@
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { RouterModule } from "@angular/router";
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { HttpClientModule } from "@angular/common/http";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PagesModule } from "./pages/pages.module";
-import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { TableComponent } from './home/table/tablecomponent';
+import { HistoryComponent } from './home/history/history.component';
+import { StatsComponent } from './home/stats/stats.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserAnimationsModule,
-    CollapseModule,
-    NgbModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule,
-    AppRoutingModule,
-    PagesModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot([
+            { path: '', component: HomeComponent },
+        ])
+    ],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        TableComponent,
+        HistoryComponent,
+        StatsComponent
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
-export class AppModule {}
+
+export class AppModule { }

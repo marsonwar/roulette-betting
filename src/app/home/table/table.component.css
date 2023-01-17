@@ -1,0 +1,21 @@
+::ng-deep td.game {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+::ng-deep td.game.high {
+    background-color: green;
+    color: white;
+}
+
+::ng-deep td.game.red {
+    background-color: red;
+    color: white;
+}
+
+::ng-deep td.game.bet {
+    background-color: yellow;
+    color: black;
+}
