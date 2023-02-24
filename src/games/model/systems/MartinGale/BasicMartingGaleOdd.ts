@@ -1,25 +1,25 @@
-import { PieceNumberEnum } from "../../enums/PieceNumberEnum";
-import { IGameSystem } from "../../interfaces/IGameSystem";
-import { Bet } from "../Bet";
+import { PieceNumberEnum } from "../../../enums/PieceNumberEnum";
+import { IGameSystem } from "../../../interfaces/IGameSystem";
+import { Bet } from "../../Bet";
 
-export class BasicMartingGaleUpper implements IGameSystem {
+export class BasicMartingGaleOdd implements IGameSystem {
     //#region Public Methods
 
     public getType() {
-        return 'BasicMartingGaleOutUpper';
+        return 'BasicMartingGaleOutOdd';
     }
 
     public getBets(previousBet: Bet[] | undefined, losses: number, prize: number) : Bet[] {
         if (!previousBet 
                 || previousBet.length == 0
-                || !previousBet.find(t => t.Number == PieceNumberEnum.OutUpper)) {
+                || !previousBet.find(t => t.Number == PieceNumberEnum.OutOdd)) {
             return [{
-                Number: PieceNumberEnum.OutUpper,
+                Number: PieceNumberEnum.OutOdd,
                 Units: 1
             }];
         }
         
-        const prvB = previousBet.find(t => t.Number == PieceNumberEnum.OutUpper) ?? <Bet>{};
+        const prvB = previousBet.find(t => t.Number == PieceNumberEnum.OutOdd) ?? <Bet>{};
         
         if (prize <= losses) {
             prvB.Units *= 2;

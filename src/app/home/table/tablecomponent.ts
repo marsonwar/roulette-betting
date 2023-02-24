@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { PieceNumberEnum } from 'src/games/enums/PieceNumberEnum';
 import { Bet } from 'src/games/model/Bet';
 import { GameStats } from 'src/games/model/GameStats';
@@ -15,15 +15,18 @@ export class TableComponent {
     //#region Consts
 
     private reds: number[] = [...ObjStyle.reds, PieceNumberEnum.OutRed];
+    private binded: boolean = false;
 
     //#endregion Consts
 
     //#region Inputs
 
     @Input()
-    public bets$: BehaviorSubject<Bet[]> | null = null;
+    public bets$: Subject<Bet[]> | null = null;
     @Input()
-    public stats$: BehaviorSubject<GameStats> | null = null;
+    public stats$: Subject<GameStats> | null = null;
+    @Input()
+    public play: any = null;
 
     //#endregion Inputs
 
@@ -37,7 +40,8 @@ export class TableComponent {
 
     //#region Constructor
 
-    constructor(private sanitizer: DomSanitizer) {
+    constructor(private sanitizer: DomSanitizer
+        , private elRef:ElementRef) {
     }
 
     //#endregion Constructor
@@ -50,7 +54,8 @@ export class TableComponent {
             , betCss = this.getBet(index) != null ? ' bet' : ''
             , bet = this.getBet(index);
         let styles = ''
-            , text = index.toString();
+            , text = index.toString()
+            , click = '';
 
         switch (index) {
             case 0:
@@ -99,11 +104,15 @@ export class TableComponent {
                 break;
         }
 
+        if (index < 37) {
+            click = ` clickable id='${index}'`;
+        }
+
         text += bet 
             ? `<br />${bet.Units * (this.gameStats?.Unit ?? 1) } €`
             : `<br />-`;
 
-        return (`<td class="game${redCss}${greeCss}${betCss}" ${styles}>${text}</td>`);
+        return (`<td ${click}class="game${redCss}${greeCss}${betCss}" ${styles}>${text}</td>`);
     }
 
     public getBet(piece: PieceNumberEnum): Bet | undefined {
@@ -124,6 +133,11 @@ export class TableComponent {
 
     //#region Events
 
+    private onClick(n: any) {
+        console.log(n);
+        this.play(n);
+    }
+
     ngOnInit() {
         if (this.bets$) {
             this.bets$?.subscribe(newValue => {
@@ -138,6 +152,18 @@ export class TableComponent {
         }
     }
 
+    ngAfterViewChecked() {
+        if (!this.binded) {
+            // assume dynamic HTML was added before
+            let objs = this.elRef.nativeElement.querySelector('[clickable]');
+
+            if (objs) {
+                this.binded = true;
+                
+                objs.addEventListener('onclick', (e: any) => console.log(1), false);
+            }
+        }
+    }
+
     //#endregion Events
 }
-

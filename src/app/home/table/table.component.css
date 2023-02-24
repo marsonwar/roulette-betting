@@ -15,6 +15,14 @@
     color: white;
 }
 
+::ng-deep td[clickable] {
+    cursor: pointer;
+}
+
+::ng-deep td[clickable]:hover {
+    background-color: gray;
+}
+
 ::ng-deep td.game.bet {
     background-color: yellow;
     color: black;

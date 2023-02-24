@@ -2,6 +2,6 @@
 <button (click)="onPlayClick()">Play</button>
 <div class="content">
 
-    <app-table [bets$]="game.bets$" [stats$]="game.stats$"></app-table>
+    <app-table [bets$]="game.bets$" [stats$]="game.stats$" [play]="game.play"></app-table>
     <app-history [history$]="game.history$"></app-history>
 </div>

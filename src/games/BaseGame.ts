@@ -1,21 +1,22 @@
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { IGameSystem } from "./interfaces/IGameSystem";
 import { Bet } from "./model/Bet";
 import { GameStats } from "./model/GameStats";
 import { PlayHistory } from "./model/PlayHistory";
 import { ObjStyle } from "./styling/ObjStyle";
-import { BasicMartingGale } from "./model/systems/BasicMartingGale";
 import { PieceNumberEnum } from "./enums/PieceNumberEnum";
-import { BasicMartingGaleBlack } from "./model/systems/BasicMartingGaleBlack";
-import { BasicMartingGaleEven } from "./model/systems/BasicMartingGaleEven";
-import { BasicMartingGaleOdd } from "./model/systems/BasicMartingGaleOdd";
-import { BasicMartingGaleLower } from "./model/systems/BasicMartingGaleLower";
-import { BasicMartingGaleUpper } from "./model/systems/BasicMartingGaleUpper";
+import { BasicMartingGale } from "./model/systems/MartinGale/BasicMartingGale";
+import { BasicMartingGaleBlack } from "./model/systems/MartinGale/BasicMartingGaleBlack";
+import { BasicMartingGaleEven } from "./model/systems/MartinGale/BasicMartingGaleEven";
+import { BasicMartingGaleOdd } from "./model/systems/MartinGale/BasicMartingGaleOdd";
+import { BasicMartingGaleLower } from "./model/systems/MartinGale/BasicMartingGaleLower";
+import { BasicMartingGaleUpper } from "./model/systems/MartinGale/BasicMartingGaleUpper";
+import { BasicMoranello } from "./model/systems/BasicMoranello";
 
 export default class BaseGame  {
     //#region Members
 
-    public gameStats: GameStats = new GameStats(1);
+    public gameStats: GameStats = new GameStats(0.1);
     public history: PlayHistory[] = [];
     public playingSystems: IGameSystem[] = [];
     public mappedBets: Map<string, Bet[]> = new Map<string, Bet[]>();
@@ -34,12 +35,13 @@ export default class BaseGame  {
     //#region Constructor
 
     constructor() {
-        this.playingSystems.push(new BasicMartingGale());
-        this.playingSystems.push(new BasicMartingGaleBlack());
-        this.playingSystems.push(new BasicMartingGaleEven());
-        this.playingSystems.push(new BasicMartingGaleOdd());
-        this.playingSystems.push(new BasicMartingGaleLower());
-        this.playingSystems.push(new BasicMartingGaleUpper());
+        // this.playingSystems.push(new BasicMartingGale());
+        // this.playingSystems.push(new BasicMartingGaleBlack());
+        // this.playingSystems.push(new BasicMartingGaleEven());
+        // this.playingSystems.push(new BasicMartingGaleOdd());
+        // this.playingSystems.push(new BasicMartingGaleLower());
+        // this.playingSystems.push(new BasicMartingGaleUpper());
+        this.playingSystems.push(new BasicMoranello());
         this.updateBets();
     }
 
@@ -97,36 +99,36 @@ export default class BaseGame  {
                     case PieceNumberEnum.OutLower:
                         betValue = winningNumber > 0
                                 && winningNumber <= 18
-                            ? bet.Units * 2
+                            ? Math.round(bet.Units * 200) / 100
                             : 0;
                     break;
                     case PieceNumberEnum.OutEven:
                         betValue = winningNumber > 0
                                 && winningNumber % 2 == 0
-                            ? bet.Units * 2
+                            ? Math.round(bet.Units * 200) / 100
                             : 0;
                     break;
                     case PieceNumberEnum.OutRed:
                         betValue = ObjStyle.reds.indexOf(winningNumber) >= 0
-                            ? bet.Units * 2
+                            ? Math.round(bet.Units * 200) / 100
                             : 0;
                     break;
                     case PieceNumberEnum.OutBlack:
                         betValue = winningNumber > 0 
                                 && ObjStyle.reds.indexOf(winningNumber) < 0
-                            ? bet.Units * 2
+                            ? Math.round(bet.Units * 200) / 100
                             : 0;
                     break;
                     case PieceNumberEnum.OutOdd:
                         betValue = winningNumber > 0
                                 && winningNumber % 2 != 0
-                            ? bet.Units * 2
+                            ? Math.round(bet.Units * 200) / 100
                             : 0;
                     break;
                     case PieceNumberEnum.OutUpper:
                         betValue = winningNumber > 0
                                 && winningNumber >= 19
-                            ? bet.Units * 2
+                            ? Math.round(bet.Units * 200) / 100
                             : 0;
                     break;
                 }
@@ -138,8 +140,8 @@ export default class BaseGame  {
     
     private updateStats(winNumber: number) {
         this.gameStats.Counter++;
-        const lost = this.calcLosses(this.bets) * this.gameStats.Unit;
-        const won = this.calcWinnings(this.bets, winNumber) * this.gameStats.Unit;
+        const lost = Math.round(this.calcLosses(this.bets) * this.gameStats.Unit * 100) / 100;
+        const won =  Math.round(this.calcWinnings(this.bets, winNumber) * this.gameStats.Unit * 100) / 100;
         this.gameStats.Balance += won - lost;
         this.stats$.next(this.gameStats);
     }
